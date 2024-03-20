@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('file:./src/main/java/coe528/project/Images/leafbackground.png');" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coe528.project.SecondaryController">
+   <children>
+      <ImageView fitHeight="721.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../java/coe528/project/Images/leafbackground.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="82.0" layoutY="86.0" prefHeight="550.0" prefWidth="440.0" style="-fx-background-image: url('file:C:/Users/Darren/Pictures/translucentback.png');" AnchorPane.leftAnchor="82.0">
+         <children>
+            <Label layoutX="24.0" layoutY="116.0" prefHeight="27.0" prefWidth="90.0" text="Username" textFill="WHITE" AnchorPane.leftAnchor="24.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameField" layoutX="24.0" layoutY="143.0" prefHeight="41.0" prefWidth="370.0" promptText="Enter your username" AnchorPane.leftAnchor="24.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Label layoutX="24.0" layoutY="207.0" prefHeight="27.0" prefWidth="90.0" text="Password" textFill="WHITE" AnchorPane.leftAnchor="24.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="registerButton" layoutX="116.0" layoutY="436.0" mnemonicParsing="false" onAction="#registerButtonClicked" onMouseEntered="#onRegisterHover" onMouseExited="#onRegisterExit" prefHeight="41.0" prefWidth="186.0" style="-fx-background-color: GREEN;" text="Register" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="passwordField" layoutX="24.0" layoutY="234.0" prefHeight="41.0" prefWidth="370.0" promptText="Enter your password">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </PasswordField>
+            <Text fill="#069a06" layoutX="70.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="R e g i s t e r" textAlignment="CENTER" wrappingWidth="299.2734375">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+            <Label fx:id="invalidUsername" layoutX="23.0" layoutY="187.0" prefHeight="20.0" prefWidth="370.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="loginButton" layoutX="225.0" layoutY="491.0" mnemonicParsing="false" onAction="#loginButtonClicked" onMouseEntered="#onLoginHover" onMouseExited="#onLoginExit" style="-fx-background-color: TRANSLUCENT;" text="Login" textFill="#069a06">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Label layoutX="24.0" layoutY="303.0" prefHeight="27.0" prefWidth="90.0" text="Balance" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="balanceField" layoutX="24.0" layoutY="330.0" prefHeight="41.0" prefWidth="370.0" promptText="\$">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="WHITE" layoutX="131.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Existing User?">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+            <Label fx:id="invalidPassword" layoutX="23.0" layoutY="278.0" prefHeight="20.0" prefWidth="370.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="invalidBalance" layoutX="23.0" layoutY="374.0" prefHeight="20.0" prefWidth="370.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="blankField" layoutX="112.0" layoutY="408.0" prefHeight="20.0" prefWidth="195.0" text="You must fill in all of the fields" textAlignment="CENTER" textFill="RED" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
