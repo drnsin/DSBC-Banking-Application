@@ -1,0 +1,11 @@
+.button {
+    -fx-background-color: GREEN;
+}
+
+.button:hover {
+    -fx-background-color: DARKGREEN;
+}
+
+.button:active {
+    -fx-background-color: WHITE;
+}

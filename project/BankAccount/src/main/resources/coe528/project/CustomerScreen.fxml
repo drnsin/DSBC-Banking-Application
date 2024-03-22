@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="coe528.project.CustomerScreenController">
+   <children>
+      <ImageView fitHeight="721.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/leafbackground.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="748.0" layoutY="85.0" prefHeight="550.0" prefWidth="440.0" AnchorPane.leftAnchor="748.0">
+         <children>
+            <ImageView fitHeight="550.0" fitWidth="440.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/translucentback.png" />
+               </image>
+            </ImageView>
+            <ListView fx:id="transactionListView" layoutX="35.0" layoutY="82.0" prefHeight="442.0" prefWidth="370.0">
+               <stylesheets>
+                  <URL value="@TransparentListView.css" />
+                  <URL value="@ScrollBar.css" />
+               </stylesheets></ListView>
+            <Text fill="#069a06" layoutX="14.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Transactions" textAlignment="CENTER" wrappingWidth="411.2734375">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="89.0" layoutY="85.0" prefHeight="200.0" prefWidth="580.0">
+         <children>
+            <ImageView fitHeight="211.0" fitWidth="580.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/translucentback1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="34.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/customerIcon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="roleLabel" layoutX="212.0" layoutY="90.0" prefHeight="25.0" prefWidth="70.0" text="Customer" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="logoutButton" layoutX="374.0" layoutY="134.0" mnemonicParsing="false" onAction="#logoutButtonClicked" prefHeight="41.0" prefWidth="186.0" stylesheets="@GreenButtonStyle.css" text="🔒 Logout" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="balanceLabel" layoutX="212.0" layoutY="130.0" prefHeight="25.0" prefWidth="157.0" text="\$" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="levelLabel" layoutX="212.0" layoutY="110.0" prefHeight="25.0" prefWidth="70.0" text="Level" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="usernameLabel" layoutX="212.0" layoutY="20.0" prefHeight="70.0" prefWidth="350.0" text="Username" textFill="#069a06">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="89.0" layoutY="358.0" prefHeight="280.0" prefWidth="580.0">
+         <children>
+            <ImageView fitHeight="304.0" fitWidth="580.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/translucentback2.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="amountField" layoutX="42.0" layoutY="108.0" prefHeight="41.0" prefWidth="314.0" promptText="\$">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Text fill="#069a06" layoutX="84.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Transaction" textAlignment="CENTER" wrappingWidth="411.2734375">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Text>
+            <Label layoutX="42.0" layoutY="78.0" prefHeight="27.0" prefWidth="90.0" text="Amount" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="transactionTypeBox" layoutX="42.0" layoutY="190.0" prefHeight="41.0" prefWidth="314.0" promptText="Type of Transaction" visibleRowCount="4" />
+            <Label layoutX="42.0" layoutY="160.0" prefHeight="27.0" prefWidth="90.0" text="Type" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="submitButton" layoutX="373.0" layoutY="190.0" mnemonicParsing="false" onAction="#addTransaction" prefHeight="41.0" prefWidth="186.0" stylesheets="@GreenButtonStyle.css" text="Submit" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="levelFeeLabel" layoutX="373.0" layoutY="116.0" prefHeight="25.0" prefWidth="186.0" text="Platinum: $0.00 Fee" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="invalidAmount" alignment="CENTER" layoutX="392.0" layoutY="161.0" text="Invalid amount/type!" textAlignment="CENTER" textFill="RED" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="133.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Online purchases must be more than or equal to $50.00" textAlignment="CENTER" wrappingWidth="314.0" />
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/DSBC_Icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
