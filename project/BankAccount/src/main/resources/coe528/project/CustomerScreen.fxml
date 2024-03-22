@@ -26,7 +26,7 @@
                   <Image url="@Images/translucentback.png" />
                </image>
             </ImageView>
-            <ListView fx:id="transactionList" layoutX="35.0" layoutY="82.0" prefHeight="442.0" prefWidth="370.0">
+            <ListView fx:id="transactionListView" layoutX="35.0" layoutY="82.0" prefHeight="442.0" prefWidth="370.0">
                <stylesheets>
                   <URL value="@TransparentListView.css" />
                   <URL value="@ScrollBar.css" />
@@ -89,7 +89,7 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Text fill="#069a06" layoutX="84.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Transaction" textAlignment="CENTER" wrappingWidth="411.2734375">
+            <Text fill="#069a06" layoutX="84.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Transaction" textAlignment="CENTER" wrappingWidth="411.2734375">
                <font>
                   <Font size="48.0" />
                </font>
@@ -99,13 +99,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="transactionTypeBox" layoutX="42.0" layoutY="200.0" prefHeight="41.0" prefWidth="314.0" promptText="Type of Transaction" visibleRowCount="4" />
-            <Label layoutX="42.0" layoutY="170.0" prefHeight="27.0" prefWidth="90.0" text="Type" textFill="WHITE">
+            <ComboBox fx:id="transactionTypeBox" layoutX="42.0" layoutY="190.0" prefHeight="41.0" prefWidth="314.0" promptText="Type of Transaction" visibleRowCount="4" />
+            <Label layoutX="42.0" layoutY="160.0" prefHeight="27.0" prefWidth="90.0" text="Type" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="submitButton" layoutX="373.0" layoutY="200.0" mnemonicParsing="false" onAction="#addTransaction" prefHeight="41.0" prefWidth="186.0" stylesheets="@GreenButtonStyle.css" text="Submit" textFill="WHITE">
+            <Button fx:id="submitButton" layoutX="373.0" layoutY="190.0" mnemonicParsing="false" onAction="#addTransaction" prefHeight="41.0" prefWidth="186.0" stylesheets="@GreenButtonStyle.css" text="Submit" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -115,6 +115,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
+            <Label fx:id="invalidAmount" alignment="CENTER" layoutX="392.0" layoutY="161.0" text="Invalid amount/type!" textAlignment="CENTER" textFill="RED" visible="false">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="133.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Online purchases must be more than or equal to $50.00" textAlignment="CENTER" wrappingWidth="314.0" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="14.0" layoutY="642.0" pickOnBounds="true" preserveRatio="true">

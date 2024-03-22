@@ -22,9 +22,9 @@ public class App extends Application {
         scene = new Scene(loadFXML("LoginScreen"), 1280, 720);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Bank Account Application");
+        stage.setTitle("DSBC Application");
         
-        Image image = new Image("coe528/project/Images/DSBC_Icon.png");
+        Image image = new Image("coe528/project/Images/leaf.png");
         stage.getIcons().add(image);
         
         stage.show();

@@ -1,18 +1,15 @@
 package coe528.project;
 
 import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 public class LoginScreenController {
     
@@ -24,16 +21,6 @@ public class LoginScreenController {
     private PasswordField passwordField;
     @FXML
     private Label invalidCreds;
-    
-    @FXML
-    private void onLoginHover() throws IOException {
-        loginButton.setStyle("-fx-background-color: DARKGREEN");
-    }
-    
-    @FXML
-    private void onLoginExit() throws IOException {
-        loginButton.setStyle("-fx-background-color: GREEN");
-    }
     
     @FXML
     private void keyPressed(KeyEvent e) {
@@ -59,7 +46,7 @@ public class LoginScreenController {
                 invalidCreds.setVisible(false);
                 try {
                     if(tempUser.login() instanceof Manager) {
-                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("managerScreen.fxml"));     
+                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ManagerScreen.fxml"));     
 
                         Parent root = (Parent)fxmlLoader.load();          
                         ManagerScreenController controller = fxmlLoader.<ManagerScreenController>getController();
@@ -68,12 +55,12 @@ public class LoginScreenController {
                      
                     } else if(tempUser.login() instanceof Customer) {
                         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("CustomerScreen.fxml"));
-                        System.out.println(App.class.getResource("CustomerScreen.fxml"));
                         
                         Parent root = (Parent)fxmlLoader.load();          
                         CustomerScreenController controller = fxmlLoader.<CustomerScreenController>getController();
                         controller.setCustomer((Customer)tempUser.login());
                         App.setRoot(root);
+                        
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();

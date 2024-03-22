@@ -58,24 +58,19 @@ public class User {
             
             scanner.close();
             
-            if(creds.length > 3 && username.equalsIgnoreCase(this.username) && password.equals(this.password)) {
+            if(creds.length > 3 && username.equalsIgnoreCase(this.username) && password.equals(this.password) && role.equals("Customer")) {
                 double balance = Double.parseDouble(creds[3]);
                 String level = creds[4];
                 return new Customer(username, password, role, balance, level);
-            } else if(username.equals("admin") && password.equals("admin") && role.equals("manager")){
-                return new Manager(username, password, role);
+            } else if(username.equals("admin") && password.equals("admin") && role.equals("Manager")){
+                return Manager.getManager();
             } else {
                 return null;
             }
-            
-        } catch(FileNotFoundException e) {
-            System.out.println("Invalid username/password!");
+        } catch(FileNotFoundException ex) {
+            System.out.println("Exception encountered: " + ex);
             return null;
         }
-    }
-    
-    public void logout() {
-        
     }
     
     public String checkLevel(double balance) {

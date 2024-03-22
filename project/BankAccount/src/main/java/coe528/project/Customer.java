@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,43 +53,54 @@ public class Customer extends User {
         return transactionList;
     }
     
-    public boolean makeTransaction(double transaction, String type) {
+    public double makeTransaction(double transaction, String type) {
         
-        if(transaction <= 50.00) {
-            return false;
+         DecimalFormat df = new DecimalFormat("0.00");
+         df.setRoundingMode(RoundingMode.FLOOR);
+         String twoDecimal;
+         
+         double deduction;
+
+        if(type.equals("Withdrawal") || type.equals("Deposit") || level.equals("Platinum")) {
+            deduction = 0.0;
         } else {
-        
-            double deduction;
-
-            if(type.equals("Withdrawal") || type.equals("Deposit") || level.equals("Platinum")) {
-                deduction = 0.0;
+            if(level.equals("Gold")) {
+                deduction = -10.0;
             } else {
-                if(level.equals("Gold")) {
-                    deduction = 10.0;
-                } else {
-                    deduction = 20.0;
-                }
+                deduction = -20.0;
             }
+        }
+        
+        if(type.equals("Online Purchase(s)") && transaction < 50.00 || transaction - deduction > balance && !type.equals("Deposit")) {
+            return 0;
+        } else {
 
-            if(type.equals("Deposit")) {
+            if(!type.equals("Deposit")) {
                 transaction *= -1;
             }
+            
+            twoDecimal = df.format(transaction + deduction);
+            double total = Double.parseDouble(twoDecimal);
 
-            balance -= transaction + deduction;
+            balance += total;
+            balance = Double.parseDouble(df.format(balance));
 
             setLevel(checkLevel(balance));
+            
+            transactionList.add(type + ": $" + twoDecimal);
+            
             try {
                 File userAccount = new File("src/main/java/coe528/project/Files/" + getUsername() +".csv");
                 FileWriter writer = new FileWriter(userAccount, true);
-                writer.write("\n" + type + ": $" + (transaction+deduction));
+                writer.write("\n" + type + ": $" + twoDecimal);
                 writer.close();
 
                 updateBalance();
             } catch(IOException e) {
-                return false;
+                return 0;
             }
             
-            return true;
+            return transaction + deduction;
             
         }
         

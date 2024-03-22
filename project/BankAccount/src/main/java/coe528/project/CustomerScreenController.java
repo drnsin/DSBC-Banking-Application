@@ -5,7 +5,9 @@
 package coe528.project;
 
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,11 +38,13 @@ public class CustomerScreenController implements Initializable {
     @FXML
     private Label levelFeeLabel;
     @FXML
+    private Label invalidAmount;
+    @FXML
     private TextField amountField;
     @FXML
     private ComboBox transactionTypeBox;
     @FXML
-    private ListView transactionList;
+    private ListView transactionListView;
     @FXML
     private Button submitButton;
     @FXML
@@ -55,7 +59,7 @@ public class CustomerScreenController implements Initializable {
         balanceLabel.setText("$" + customer.getBalance());
         levelLabel.setText(customer.getLevel());
         for(String s : customer.gettransactionList()) {
-            transactionList.getItems().add(0, s);
+            transactionListView.getItems().add(0, s);
         }
         levelFeeCheck();
     }
@@ -71,53 +75,56 @@ public class CustomerScreenController implements Initializable {
     
     @FXML
     private void addTransaction(ActionEvent event) {
+        DecimalFormat df = new DecimalFormat("0.00");
+        df.setRoundingMode(RoundingMode.FLOOR);
         double balanceValue = 0.0;
         
         boolean balanceCheck = false;
+        String twoDecimals;
         
         try{
-            balanceValue = Double.parseDouble(amountField.getText());
-            int balInt = (int) balanceValue;
-            int twoDecimals = (int) ((balanceValue - balInt) * 100);
-            balanceValue = (double) balInt + ((double) twoDecimals / 100);
-            amountField.setText(String.valueOf(balanceValue));
-            balanceCheck = true;
-        } catch(Exception e) {
-            e.printStackTrace();
+            twoDecimals = df.format(Double.parseDouble(amountField.getText()));
+            amountField.setText(twoDecimals);
+            balanceValue = Double.parseDouble(twoDecimals);
+            balanceCheck = balanceValue > 0.00;
+        } catch(NumberFormatException ex) {
+            System.out.println("Exception encountered: " + ex);
+            balanceCheck = false;
         }
         
-        if(balanceCheck && transactionTypeBox.getSelectionModel().getSelectedItem() != null) {
-            String category = transactionTypeBox.getSelectionModel().getSelectedItem().toString();
-            if (customer.makeTransaction(balanceValue, category)) { 
-                if(!category.equals("Deposit")) {
-                    balanceValue *= -1;
-                }   
-                transactionList.getItems().add(0, category + ": $" + balanceValue);
-                balanceLabel.setText("$" + customer.getBalance());
+        if(!balanceCheck || transactionTypeBox.getSelectionModel().getSelectedItem() == null) {
+            invalidAmount.setVisible(true);
+        } else {
+          String category = transactionTypeBox.getSelectionModel().getSelectedItem().toString();
+            twoDecimals = df.format(customer.makeTransaction(balanceValue, category));
+            balanceValue = Double.parseDouble(twoDecimals);
+            if (balanceValue != 0) {
+                invalidAmount.setVisible(false);
+                transactionListView.getItems().add(0, category + ": $" + twoDecimals);
+                balanceLabel.setText("$" + df.format(customer.getBalance()));
                 levelLabel.setText(customer.getLevel());
                 levelFeeCheck();
+            } else {
+                invalidAmount.setVisible(true);
             }
         }
-        
     }
     
     @FXML
     private void levelFeeCheck() {
         if(customer.getLevel().equals("Platinum")) {
-            levelFeeLabel.setText("Platinum: $0.00 Fee");
+            levelFeeLabel.setText("+ Platinum: $0.00 Fee");
         } else if(customer.getLevel().equals("Gold")) {
-            levelFeeLabel.setText("Gold: $10.00 Fee");
+            levelFeeLabel.setText("+ Gold: $10.00 Fee");
         } else {
-            levelFeeLabel.setText("Silver: $20.00 Fee");
+            levelFeeLabel.setText("+ Silver: $20.00 Fee");
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ObservableList<String> list = FXCollections.observableArrayList("Deposit", "Withdrawal", "Dining Out", "Groceries", "Entertainment", "Shopping",
-                                                                        "Transportation", "Home", "Travel", "Education", "Miscellaneous");
+        ObservableList<String> list = FXCollections.observableArrayList("Deposit", "Withdrawal", "Online Purchase(s)");
         transactionTypeBox.setItems(list);
-        
     }
   
 }
